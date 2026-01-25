@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Formulário Moderno</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  min-height:100vh;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px
+}
+.container{
+  width:100%;
+  max-width:600px;
+  background:rgba(255,255,255,.95);
+  border-radius:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+  overflow:hidden;
+  position:relative
+}
+.screen{display:none;padding:60px 40px;min-height:500px}
+.screen.active{display:flex;flex-direction:column;justify-content:center;align-items:center}
+.progress-bar{
+  position:absolute;top:0;left:0;height:5px;
+  background:linear-gradient(90deg,#667eea,#764ba2);
+  transition:width .5s
+}
+button{
+  padding:15px 40px;
+  font-size:1.1em;
+  font-weight:600;
+  color:#fff;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  margin-top:30px
+}
+input,textarea,select{
+  width:100%;
+  padding:15px;
+  font-size:1em;
+  border:2px solid #e0e0e0;
+  border-radius:12px
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Tela 1 -->
+<div class="screen active" id="screen1">
+  <h1>✨ Bem-vindo!</h1>
+  <p>Responda 5 perguntas rápidas.</p>
+  <button onclick="goToScreen(2)">Começar</button>
+</div>
+
+<!-- Tela 2 -->
+<div class="screen" id="screen2">
+  <div class="question" id="q1">
+    <label>Nome</label>
+    <input id="nome">
+    <button onclick="nextQuestion(1)">Próxima</button>
+  </div>
+
+  <div class="question" id="q2" style="display:none">
+    <label>Idade</label>
+    <input id="idade" type="number">
+    <button onclick="nextQuestion(2)">Próxima</button>
+  </div>
+
+  <div class="question" id="q3" style="display:none">
+    <label>Queixa</label>
+    <textarea id="queixa"></textarea>
+    <button onclick="nextQuestion(3)">Próxima</button>
+  </div>
+
+  <div class="question" id="q4" style="display:none">
+    <label>Estado civil</label>
+    <select id="estadoCivil">
+      <option value="">Selecione</option>
+      <option>Solteiro(a)</option>
+      <option>Casado(a)</option>
+    </select>
+    <button onclick="nextQuestion(4)">Próxima</button>
+  </div>
+
+  <div class="question" id="q5" style="display:none">
+    <label>O que é a vida?</label>
+    <textarea id="vida"></textarea>
+    <button onclick="submitForm()">Finalizar</button>
+  </div>
+</div>
+
+<!-- Tela 3 -->
+<div class="screen" id="screen3">
+  <h2>✅ Enviado com sucesso!</h2>
+  <p>Obrigado pelas respostas.</p>
+</div>
+
+</div>
+
+<script>
+let currentQuestion=1
+const formData={}
+
+function goToScreen(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'))
+  document.getElementById('screen'+n).classList.add('active')
+  updateProgress()
+}
+
+function nextQuestion(n){
+  const el=document.getElementById(['','nome','idade','queixa','estadoCivil','vida'][n])
+  if(!el.value) return el.focus()
+  formData[el.id]=el.value
+  document.getElementById('q'+n).style.display='none'
+  document.getElementById('q'+(n+1)).style.display='block'
+  currentQuestion++
+  updateProgress()
+}
+
+async function submitForm(){
+  formData.vida=document.getElementById('vida').value
+
+  await fetch("https://primary-production-bdcbc.up.railway.app/webhook-test/form-trello",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(formData)
+  })
+
+  goToScreen(3)
+}
+
+function updateProgress(){
+  document.getElementById('progressBar').style.width=
+    currentQuestion<=5?(currentQuestion/5*100)+'%':'100%'
+}
+</script>
+</body>
+</html>
