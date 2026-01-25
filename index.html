@@ -132,7 +132,7 @@ function nextQuestion(n){
 async function submitForm(){
   formData.vida=document.getElementById('vida').value
 
-  await fetch("https://primary-production-bdcbc.up.railway.app/webhook-test/form-trello",{
+  await fetch("https://primary-production-bdcbc.up.railway.app/webhook/form-trello",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(formData)
