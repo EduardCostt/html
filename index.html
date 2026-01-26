@@ -6,283 +6,375 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
+body{
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #e6ecf3, #cfd9e8);
-  margin: 0;
-  padding: 0;
+  background: linear-gradient(135deg,#e3f2fd,#eceff1);
+  padding:20px;
 }
-.container {
-  max-width: 900px;
-  margin: 30px auto;
-  background: #fff;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.15);
+form{
+  max-width:1000px;
+  margin:auto;
+  background:#fff;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
 }
-h1, h2 {
-  color: #2c5aa0;
-  text-align: center;
+h1,h2{
+  color:#0d47a1;
 }
-.step { display: none; }
-.step.active { display: block; }
-
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #333;
+label{
+  font-weight:bold;
+  margin-top:15px;
+  display:block;
 }
-input, textarea, select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+input,textarea,select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border-radius:6px;
+  border:1px solid #b0bec5;
 }
-textarea { min-height: 80px; }
-
-.radio-group, .check-group {
-  margin-top: 8px;
+textarea{resize:vertical}
+.group{
+  display:flex;
+  gap:20px;
+  margin-top:8px;
+  flex-wrap:wrap;
 }
-.radio-group label, .check-group label {
-  font-weight: normal;
-  display: inline-block;
-  margin-right: 15px;
+.group label{font-weight:normal}
+section{margin-bottom:40px}
+.btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(135deg,#1976d2,#64b5f6);
+  margin-top:15px;
 }
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
+.download{
+  background:linear-gradient(135deg,#455a64,#90a4ae);
 }
-button {
-  padding: 12px 25px;
-  border: none;
-  border-radius: 8px;
-  background: #2c5aa0;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-button.secondary {
-  background: #b0b7c3;
-  color: #333;
-}
-button:hover { opacity: .9; }
-
-.progress {
-  height: 6px;
-  background: #ddd;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #2c5aa0, #4f8bd6);
-  border-radius: 5px;
-}
+@media print{.btn{display:none}}
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="progress"><div class="progress-bar" id="progress"></div></div>
+<form id="form">
 
-  <!-- TELA 1 -->
-  <div class="step active">
-    <h1>Anamnese</h1>
-    <p style="text-align:center">
-      Este formulário é confidencial e tem como objetivo compreender melhor sua história.
-    </p>
-    <div class="buttons">
-      <span></span>
-      <button onclick="next()">Iniciar</button>
-    </div>
-  </div>
+<!-- TELA 1 -->
+<section>
+<h1>Anamnese</h1>
+</section>
 
-  <!-- TELA 2 – DADOS PESSOAIS -->
-  <div class="step">
-    <h2>Dados Pessoais</h2>
+<!-- TELA 2 -->
+<section>
+<h2>Dados Pessoais</h2>
 
-    <label>Nome completo *</label>
-    <input required>
+<label>Nome *</label>
+<input required>
 
-    <label>RG</label>
-    <input>
+<label>RG</label>
+<input>
 
-    <label>CPF *</label>
-    <input id="cpf" required>
+<label>CPF *</label>
+<input id="cpf" required>
 
-    <label>Data de nascimento *</label>
-    <input type="date" required>
+<label>Data de Nascimento *</label>
+<input type="date" required>
 
-    <label>Estado civil</label>
-    <select>
-      <option></option>
-      <option>Solteiro(a)</option>
-      <option>Casado(a)</option>
-      <option>Divorciado(a)</option>
-    </select>
+<label>Estado Civil</label>
+<input>
 
-    <label>Endereço</label>
-    <input>
+<label>Endereço</label>
+<input>
 
-    <label>CEP</label>
-    <input id="cep">
+<label>CEP</label>
+<input id="cep">
 
-    <label>Bairro</label>
-    <input>
+<label>Bairro</label>
+<input>
 
-    <label>Cidade</label>
-    <input>
+<label>Cidade</label>
+<input>
 
-    <label>Telefone *</label>
-    <input id="tel" required>
+<label>Telefone *</label>
+<input id="tel" required>
 
-    <label>Email *</label>
-    <input type="email" required>
+<label>Email *</label>
+<input type="email" required>
 
-    <label>Profissão</label>
-    <input>
+<label>Profissão</label>
+<input>
 
-    <label>Cargo</label>
-    <input>
+<label>Cargo</label>
+<input>
 
-    <label>Escolaridade</label>
-    <input>
+<label>Escolaridade</label>
+<input>
 
-    <label>Queixa principal – por que buscou terapia?</label>
-    <textarea></textarea>
+<label>Queixa principal – por que buscou a terapia?</label>
+<textarea rows="4"></textarea>
+</section>
 
-    <div class="buttons">
-      <button class="secondary" onclick="prev()">Voltar</button>
-      <button onclick="next()">Próximo</button>
-    </div>
-  </div>
+<!-- TELA 3 -->
+<section>
+<h2>Relacionamentos</h2>
 
-  <!-- TELA 3 – RELACIONAMENTOS -->
-  <div class="step">
-    <h2>Relacionamentos</h2>
-
-    <label>Tem filhos?</label>
-    <div class="radio-group">
-      <label><input type="radio" name="filhos"> Sim</label>
-      <label><input type="radio" name="filhos"> Não</label>
-    </div>
-
-    <label>Quantos?</label>
-    <input type="number">
-
-    <label>Como é o relacionamento com eles?</label>
-    <textarea></textarea>
-
-    <label>Como é o relacionamento com o parceiro(a)?</label>
-    <textarea></textarea>
-
-    <label>Como se sente em casa?</label>
-    <textarea></textarea>
-
-    <label>Como se sente no trabalho?</label>
-    <textarea></textarea>
-
-    <label>Como se sente no contexto social?</label>
-    <textarea></textarea>
-
-    <label>Como se sente no contexto religioso?</label>
-    <textarea></textarea>
-
-    <div class="buttons">
-      <button class="secondary" onclick="prev()">Voltar</button>
-      <button onclick="next()">Próximo</button>
-    </div>
-  </div>
-
-  <!-- TELA 4 – SAÚDE EMOCIONAL -->
-  <div class="step">
-    <h2>Saúde Emocional</h2>
-
-    <label>Algum trauma?</label>
-    <textarea></textarea>
-
-    <label>Alguma fobia?</label>
-    <textarea></textarea>
-
-    <label>Usa drogas?</label>
-    <textarea></textarea>
-
-    <label>Insônia? Frequência?</label>
-    <textarea></textarea>
-
-    <label>Ideias suicidas?</label>
-    <textarea></textarea>
-
-    <label>Consumo de álcool?</label>
-    <textarea></textarea>
-
-    <label>É fumante?</label>
-    <textarea></textarea>
-
-    <label>Nível de estresse</label>
-    <select>
-      <option>Baixo</option>
-      <option>Médio</option>
-      <option>Alto</option>
-    </select>
-
-    <div class="buttons">
-      <button class="secondary" onclick="prev()">Voltar</button>
-      <button onclick="next()">Próximo</button>
-    </div>
-  </div>
-
-  <!-- TELA FINAL -->
-  <div class="step">
-    <h2>Finalizado</h2>
-    <p style="text-align:center">
-      Obrigado por responder. Você pode baixar suas respostas abaixo.
-    </p>
-
-    <div class="buttons">
-      <button onclick="download()">⬇️ Baixar respostas</button>
-    </div>
-  </div>
-
+<label>Estado civil</label>
+<div class="group">
+<label><input type="radio" name="civil"> Casado</label>
+<label><input type="radio" name="civil"> Solteiro</label>
+<label><input type="radio" name="civil"> Divorciado</label>
 </div>
 
+<label>Tem filhos?</label>
+<div class="group">
+<label><input type="radio" name="filhos"> Sim</label>
+<label><input type="radio" name="filhos"> Não</label>
+</div>
+
+<label>Quantos?</label>
+<input type="number">
+
+<label>Como é o relacionamento com eles?</label>
+<textarea></textarea>
+
+<label>Como é o relacionamento com o parceiro(a)?</label>
+<textarea></textarea>
+
+<label>Como se sente em casa?</label>
+<textarea></textarea>
+
+<label>Como se sente no trabalho?</label>
+<textarea></textarea>
+
+<label>Como se sente no contexto social?</label>
+<textarea></textarea>
+
+<label>Contexto religioso</label>
+<textarea></textarea>
+
+<label>Frustrações</label>
+<div class="group">
+<label><input type="checkbox"> Pais</label>
+<label><input type="checkbox"> Irmãos</label>
+<label><input type="checkbox"> Filhos</label>
+<label><input type="checkbox"> Profissão</label>
+<label><input type="checkbox"> Cônjuge</label>
+<label><input type="checkbox"> Identidade sexual</label>
+<label><input type="checkbox"> Vida sexual</label>
+</div>
+</section>
+
+<!-- TELA 4 -->
+<section>
+<h2>Sexualidade</h2>
+
+<label>Idade da iniciação sexual</label>
+<input type="number">
+
+<label>Como foi?</label>
+<div class="group">
+<label><input type="radio" name="sex"> Traumático</label>
+<label><input type="radio" name="sex"> Normal</label>
+<label><input type="radio" name="sex"> Bom</label>
+</div>
+
+<label>Problemas relacionados ao sexo?</label>
+<input>
+
+<label>Realização sexual</label>
+<div class="group">
+<label><input type="radio" name="real"> Sim</label>
+<label><input type="radio" name="real"> Não</label>
+</div>
+
+<label>Importância do sexo</label>
+<div class="group">
+<label><input type="radio" name="imp"> Importante</label>
+<label><input type="radio" name="imp"> Muito importante</label>
+<label><input type="radio" name="imp"> Sem importância</label>
+</div>
+</section>
+
+<!-- TELA 5 -->
+<section>
+<h2>Saúde Emocional</h2>
+
+<label>Trauma?</label>
+<input>
+
+<label>Fobia?</label>
+<input>
+
+<label>Medo?</label>
+<input>
+
+<label>Uso de drogas?</label>
+<input>
+
+<label>Insônia? Frequência</label>
+<input>
+
+<label>Ideias suicidas?</label>
+<input>
+
+<label>Bebidas alcoólicas? Frequência</label>
+<input>
+
+<label>Fumante? Tempo</label>
+<input>
+
+<label>Nível de estresse</label>
+<select>
+<option>Alto</option>
+<option>Médio</option>
+<option>Baixo</option>
+</select>
+
+<label>Medicação em uso?</label>
+<input>
+
+<label>Já passou por psicólogo ou psiquiatra?</label>
+<div class="group">
+<label><input type="radio"> Sim</label>
+<label><input type="radio"> Não</label>
+</div>
+
+<label>Já foi diagnosticado?</label>
+<div class="group">
+<label><input type="radio"> Sim</label>
+<label><input type="radio"> Não</label>
+</div>
+
+<label>Tem muitos amigos?</label>
+<div class="group">
+<label><input type="radio"> Sim</label>
+<label><input type="radio"> Não</label>
+</div>
+
+<label>Passatempo preferido</label>
+<input>
+
+<label>Como as pessoas te descrevem?</label>
+<textarea></textarea>
+
+<label>Você se considera feliz? Por quê?</label>
+<textarea></textarea>
+
+<label>O que mudaria no seu comportamento?</label>
+<textarea></textarea>
+</section>
+
+<!-- TELA 6 -->
+<section>
+<h2>História Familiar e Infância</h2>
+
+<label>O que é a vida para você?</label>
+<textarea></textarea>
+
+<label>Foi criado pelos pais?</label>
+<div class="group">
+<label><input type="radio"> Sim</label>
+<label><input type="radio"> Não</label>
+</div>
+
+<label>Relação com o pai</label>
+<textarea></textarea>
+
+<label>Relação com a mãe</label>
+<textarea></textarea>
+
+<label>Eram agressivos?</label>
+<div class="group">
+<label><input type="radio"> Sim</label>
+<label><input type="radio"> Não</label>
+</div>
+
+<label>Qual era mais bravo?</label>
+<div class="group">
+<label><input type="radio"> Pai</label>
+<label><input type="radio"> Mãe</label>
+</div>
+
+<label>Relacionamento entre eles</label>
+<select>
+<option>Muito bom</option>
+<option>Bom</option>
+<option>Regular</option>
+<option>Péssimo</option>
+</select>
+
+<label>Possui irmãos? Quantos?</label>
+<input>
+
+<label>Relação com irmãos</label>
+<select>
+<option>Ótima</option>
+<option>Boa</option>
+<option>Ruim</option>
+</select>
+
+<label>Criança introvertida ou extrovertida?</label>
+<select>
+<option>Introvertida</option>
+<option>Extrovertida</option>
+</select>
+
+<label>Medos da infância</label>
+<textarea></textarea>
+
+<label>Medos atuais</label>
+<textarea></textarea>
+</section>
+
+<!-- TELA 7 -->
+<section>
+<h2>Sentimentos Atuais</h2>
+
+<label>Sentimentos mais comuns hoje</label>
+<textarea rows="5"></textarea>
+</section>
+
+<!-- TELA FINAL -->
+<section>
+<h2>Finalização</h2>
+<button class="btn">Enviar Anamnese</button>
+<button type="button" onclick="window.print()" class="btn download">
+Download / Imprimir
+</button>
+</section>
+
+</form>
+
 <script>
-let step = 0;
-const steps = document.querySelectorAll('.step');
-const progress = document.getElementById('progress');
-
-function showStep() {
-  steps.forEach((s,i)=>s.classList.toggle('active', i===step));
-  progress.style.width = ((step)/(steps.length-1))*100 + '%';
-}
-function next() {
-  if(step < steps.length-1) step++;
-  showStep();
-}
-function prev() {
-  if(step > 0) step--;
-  showStep();
-}
-
-function download() {
-  const data = {};
-  document.querySelectorAll('input, textarea, select').forEach(el=>{
-    if(el.type !== 'radio' || el.checked){
-      data[el.previousElementSibling?.innerText || el.name] = el.value;
-    }
+function mask(id,pattern){
+  document.getElementById(id).addEventListener("input",e=>{
+    let v=e.target.value.replace(/\D/g,"");
+    e.target.value=v.replace(pattern,"$1.$2.$3-$4");
   });
-  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'anamnese.json';
-  a.click();
 }
+mask("cpf",/(\d{3})(\d{3})(\d{3})(\d{2})/);
+
+document.getElementById("tel").addEventListener("input",e=>{
+  e.target.value=e.target.value.replace(/\D/g,"")
+  .replace(/(\d{2})(\d)/,"($1) $2")
+  .replace(/(\d{5})(\d)/,"$1-$2");
+});
+
+document.getElementById("cep").addEventListener("input",e=>{
+  e.target.value=e.target.value.replace(/\D/g,"")
+  .replace(/(\d{5})(\d)/,"$1-$2");
+});
+
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  alert("Anamnese validada com sucesso!");
+});
 </script>
 
 </body>
